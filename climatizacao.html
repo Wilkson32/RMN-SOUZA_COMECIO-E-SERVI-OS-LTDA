@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climatização | RMN Souza</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    
+    <!-- Fontes Google e Ícones FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Variáveis de Tema Atualizadas */
+        :root {
+            --main-foreground: #0f172a; 
+            --main-background: #f8fafc;
+            --card-background: #ffffff;
+            --button-background: #16a34a; 
+            --button-hover: #15803d;
+            --header-background: #0033c6; 
+            --header-dark: #002288;
+            --footer-background: #0f172a;
+            --accent-orange: #ff5000; 
+            --accent-orange-hover: #e04600;
+            --heading-font: "Libre Baskerville", serif; 
+            --body-font: "Instrument Sans", sans-serif;
+            --border-radius: 12px; 
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 30px rgba(0,0,0,0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Reset e Base */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: var(--body-font); 
+            background: var(--main-background); 
+            color: var(--main-foreground); 
+            line-height: 1.5; 
+        }
+        h1, h2, h3, h4 { font-family: var(--heading-font); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Top Header */
+        .top-header { 
+            background: var(--header-background); 
+            color: #ffffff; 
+            padding: 15px 0 0; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: var(--shadow-sm);
+        }
+        .header-main-row { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            gap: 20px; 
+            padding-bottom: 15px; 
+            flex-wrap: wrap;
+        }
+        .logo { 
+            font-size: 24px; 
+            font-weight: 800; 
+            text-decoration: none; 
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
+        .search-bar { 
+            display: flex; 
+            flex-grow: 1; 
+            max-width: 600px; 
+            position: relative; 
+        }
+        .search-bar input { 
+            width: 100%; 
+            padding: 12px 45px 12px 20px; 
+            border-radius: 25px; 
+            border: none; 
+            outline: none; 
+            font-size: 14px;
+            box-shadow: var(--shadow-sm);
+        }
+        .search-bar button { 
+            position: absolute; 
+            right: 15px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            color: var(--header-background); 
+            font-size: 16px;
+        }
+        .user-actions { display: flex; gap: 12px; }
+        .btn-action { 
+            color: white; 
+            text-decoration: none; 
+            font-weight: 600; 
+            font-size: 14px; 
+            padding: 8px 16px; 
+            border-radius: 20px; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: var(--transition);
+        }
+        .btn-login { background: var(--accent-orange); }
+        .btn-login:hover { background: var(--accent-orange-hover); }
+        .btn-cart { background: rgba(255, 255, 255, 0.15); }
+        .btn-cart:hover { background: rgba(255, 255, 255, 0.25); }
+
+        /* Navegação e Dropdown */
+        .header-nav-row { display: flex; gap: 25px; align-items: center; }
+        .departamentos-container { position: relative; }
+        .btn-departamentos { 
+            background: var(--header-dark); 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            font-weight: 700; 
+            border-radius: var(--border-radius) var(--border-radius) 0 0; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: var(--transition);
+        }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: var(--card-background); 
+            min-width: 260px; 
+            box-shadow: var(--shadow-lg); 
+            z-index: 100; 
+            border-radius: 0 0 var(--border-radius) var(--border-radius); 
+        }
+        .departamentos-container:hover .dropdown-menu { display: block; }
+        .dropdown-menu a { 
+            color: var(--main-foreground); 
+            padding: 12px 18px; 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            font-weight: 500; 
+            transition: var(--transition);
+        }
+        .dropdown-menu a:hover { background: var(--main-background); color: var(--header-background); }
+        
+        .nav-links { display: flex; gap: 20px; list-style: none; overflow-x: auto; }
+        .nav-links a { 
+            color: white; 
+            text-decoration: none; 
+            font-size: 14px; 
+            font-weight: 600; 
+            opacity: 0.9; 
+            white-space: nowrap; 
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { opacity: 1; text-decoration: underline; }
+
+        /* Banner Hero */
+        .hero-banner { 
+            background: linear-gradient(135deg, var(--header-background) 0%, var(--header-dark) 100%); 
+            color: white; 
+            padding: 40px 0; 
+            text-align: center; 
+        }
+        .hero-banner h1 { font-size: 32px; margin-bottom: 8px; }
+        .hero-banner p { opacity: 0.9; }
+
+        /* Categorias Rápidas / Chips */
+        .quick-categories { padding: 20px 0; }
+        .categories-chips { 
+            display: flex; 
+            gap: 10px; 
+            overflow-x: auto; 
+            padding-bottom: 5px; 
+            scrollbar-width: thin;
+        }
+        .chip { 
+            background: var(--card-background); 
+            color: var(--main-foreground); 
+            padding: 10px 20px; 
+            border-radius: 20px; 
+            text-decoration: none; 
+            font-size: 14px; 
+            font-weight: 600; 
+            white-space: nowrap; 
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .chip:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .chip.active { background: var(--header-background); color: white; }
+
+        /* Grade de Produtos */
+        .products-section { padding: 30px 0 60px; }
+        .products-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+            gap: 25px; 
+        }
+        .product-card { 
+            border: 1px solid #e2e8f0; 
+            border-radius: var(--border-radius); 
+            padding: 20px; 
+            text-align: center; 
+            background: var(--card-background); 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition); 
+        }
+        .product-card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: var(--shadow-md); 
+        }
+        
+        .product-image-container { 
+            height: 180px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            background: var(--main-background); 
+            border-radius: calc(var(--border-radius) - 4px); 
+            margin-bottom: 15px; 
+            overflow: hidden; 
+        }
+        .product-image-container img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            border-radius: calc(var(--border-radius) - 4px); 
+        }
+        
+        .product-title { 
+            font-size: 14px; 
+            font-weight: 600; 
+            margin-bottom: 15px; 
+            color: var(--main-foreground); 
+            line-height: 1.4;
+        }
+        .btn-buy { 
+            background: var(--button-background); 
+            color: white; 
+            text-decoration: none; 
+            padding: 12px; 
+            border-radius: var(--border-radius); 
+            font-weight: 700; 
+            display: block; 
+            transition: var(--transition); 
+        }
+        .btn-buy:hover { background: var(--button-hover); }
+
+        /* Rodapé Escuro (Ajustado para var(--footer-background): #0f172a) */
+        footer { 
+            background: var(--footer-background); 
+            color: #ffffff;
+            border-top: 4px solid var(--accent-orange); 
+            padding: 40px 0 20px; 
+        }
+        .footer-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 30px; 
+            margin-bottom: 30px;
+        }
+        .footer-col h4 { color: #ffffff; margin-bottom: 15px; }
+        .footer-col p { color: #94a3b8; font-size: 14px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 8px; }
+        .footer-col a { color: #cbd5e1; text-decoration: none; font-size: 14px; transition: var(--transition); }
+        .footer-col a:hover { color: var(--accent-orange); text-decoration: underline; }
+
+        /* Div inferior do Rodapé */
+        .footer-bottom {
+            border-top: 1px solid #1e293b;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #94a3b8;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: center;
+        }
+        .dev-credit {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+        .dev-credit a {
+            color: var(--accent-orange);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .dev-credit a:hover {
+            text-decoration: underline;
+            color: #ffffff;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-main-row { flex-direction: column; align-items: stretch; }
+            .user-actions { justify-content: space-between; }
+            .header-nav-row { flex-direction: column; align-items: stretch; }
+            .btn-departamentos { width: 100%; justify-content: center; }
+            .dropdown-menu { width: 100%; }
+        }
+    </style>
+    <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+    <!-- Header Principal -->
+    <header class="top-header">
+        <div class="container">
+            <div class="header-main-row">
+                <a href="index.html" class="logo" aria-label="RMN Souza Comércio e Serviços LTDA"><img src="img/logo-rmn.png" alt="RMN Souza Comércio e Serviços LTDA" class="logo-img"></a>
+                
+                <form class="search-bar" action="busca.html">
+                    <input type="text" name="q" placeholder="O que você está procurando?" aria-label="Pesquisar produtos">
+                    <button type="submit" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                
+                <div class="user-actions">
+                    <a href="login.html" class="btn-action btn-login">
+                        <i class="fa-regular fa-user"></i> Minha Conta
+                    </a>
+                    <a href="orcamento.html" class="btn-action btn-cart">
+                        <i class="fa-solid fa-cart-shopping"></i> Carrinho
+                    </a>
+                </div>
+            </div>
+
+            <div class="header-nav-row">
+                <div class="departamentos-container">
+                    <button class="btn-departamentos">
+                        <i class="fa-solid fa-bars"></i> DEPARTAMENTOS
+                    </button>
+                    <nav class="dropdown-menu">
+                        <a href="climatizacao.html"><i class="fa-solid fa-snowflake"></i> Climatização</a>
+                        <a href="informatica.html"><i class="fa-solid fa-laptop"></i> Informática</a>
+                        <a href="ferramentas.html"><i class="fa-solid fa-screwdriver-wrench"></i> Ferramentas</a>
+                        <a href="papelaria.html"><i class="fa-solid fa-scroll"></i> Papelaria</a>
+                        <a href="refrigeradores.html"><i class="fa-solid fa-kitchen-set"></i> Refrigeradores</a>
+                        <a href="eletroportateis.html"><i class="fa-solid fa-plug"></i> Eletroportáteis</a>
+                        <a href="moveis-escritorio.html"><i class="fa-solid fa-chair"></i> Móveis de Escritório</a>
+                        <a href="audio.html"><i class="fa-solid fa-headphones"></i> Áudio</a>
+                        <a href="servicos-seguranca.html"><i class="fa-solid fa-video"></i> Segurança & Redes</a>
+                    </nav>
+                </div>
+
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="climatizacao.html" class="active">Climatização</a></li>
+                    <li><a href="informatica.html">Informática</a></li>
+                    <li><a href="ferramentas.html">Ferramentas</a></li>
+                    <li><a href="papelaria.html">Papelaria</a></li>
+                    <li><a href="refrigeradores.html">Refrigeradores</a></li>
+                    <li><a href="eletroportateis.html">Eletroportáteis</a></li>
+                    <li><a href="moveis-escritorio.html">Móveis de Escritório</a></li>
+                    <li><a href="audio.html">Áudio</a></li>
+                    <li><a href="servicos-seguranca.html">Segurança & Redes</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner principal da categoria -->
+    <section class="hero-banner">
+        <div class="container">
+            <h1>Climatização & Ventilação</h1>
+            <p>O clima perfeito para sua casa ou escritório durante todo o ano.</p>
+        </div>
+    </section>
+
+    <!-- Barra de navegação rápida (Chips) -->
+    <section class="quick-categories">
+        <div class="container">
+            <div class="categories-chips">
+                <a href="index.html" class="chip">Todos os Produtos</a>
+                <a href="climatizacao.html" class="chip active">❄️ Climatização</a>
+                <a href="informatica.html" class="chip">💻 Informática</a>
+                <a href="ferramentas.html" class="chip">🛠️ Ferramentas</a>
+                <a href="papelaria.html" class="chip">📜 Papelaria</a>
+                <a href="refrigeradores.html" class="chip">🧊 Refrigeradores</a>
+                <a href="eletroportateis.html" class="chip">🔌 Eletroportáteis</a>
+                <a href="moveis-escritorio.html" class="chip">🪑 Móveis de Escritório</a>
+                <a href="audio.html" class="chip">🎧 Áudio</a>
+                <a href="servicos-seguranca.html" class="chip">📹 Segurança & Redes</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Listagem de Produtos -->
+    <main class="container products-section">
+        <div class="products-grid">
+            
+            <article class="product-card">
+                <div class="product-image-container">
+                    <img src="https://m.magazineluiza.com.br/a-static/420x420/ar-condicionado-split-12-000-btus-philco-inverter-frio-hi-wall-pac12fc-int/magazineluiza/240084600/651fc0fcddddea5fcce2e5beb29acf06.jpg" alt="Ar Condicionado Split Inverter Philco 12000 BTU">
+                </div>
+                <h3 class="product-title">Ar-condicionado Split 12.000 BTUs Philco Inverter</h3>
+                <a href="orcamento.html" class="btn-buy">Solicite o Orçamento</a>
+            </article>
+
+            <article class="product-card">
+                <div class="product-image-container">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_2X_886667-MLA99978747531_112025-F.webp" alt="Ventilador de Parede Venti-Delta 50cm">
+                </div>
+                <h3 class="product-title">Ventilador de Parede Venti-Delta 50cm Oscilante Bivolt 4 Pás Branco</h3>
+                <a href="orcamento.html" class="btn-buy">Solicite o Orçamento</a>
+            </article>
+
+            <article class="product-card">
+                <div class="product-image-container">
+                    <img src="https://www.ferreiracosta.com/_next/image?url=https%3A%2F%2Fdirogkf3gm8b7.cloudfront.net%2Fproduction%2Fproducts%2F467260%2Fimages%2Fenhanced-media%2F1_0_4aecaf25-4f11-4560-a2d3-609e67d7ef53&w=640&q=75" alt="Ar Condicionado Springer Midea 24000 BTU">
+                </div>
+                <h3 class="product-title">Ventilador de Parede 50cm NVPPRO50 220V Preto - Mondial</h3>
+                <a href="orcamento.html" class="btn-buy">Solicite o Orçamento</a>
+            </article>
+
+
+            <article class="product-card">
+                <div class="product-image-container">
+                    <img src="https://m.magazineluiza.com.br/a-static/420x420/climatizador-de-ar-britania-frio-3-velocidades-70l-bcl70/magazineluiza/238610300/22af14c5dbe6a510c05804794fccce68.jpg" alt="Ar Condicionado Springer Midea 24000 BTU">
+                </div>
+                <h3 class="product-title">Climatizador de Ar Britânia Frio 3 Velocidades 70L BCL70</h3>
+</h3>
+                <a href="orcamento.html" class="btn-buy">Solicite o Orçamento</a>
+            </article>
+
+            <article class="product-card">
+                <div class="product-image-container">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/1158161784289408/648612.jpg" alt="Ar Condicionado Portátil 10.000 BTU">
+                </div>
+                <h3 class="product-title">Ar Condicionado Split Teto Carrier Xpower 60000 Btus Frio Inverter </h3>
+                <a href="orcamento.html" class="btn-buy">Solicite o Orçamento</a>
+            </article>
+
+               <article class="product-card">
+                <div class="product-image-container">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/893951740660804/605140.jpg" alt="Ar Condicionado Portátil 10.000 BTU">
+                </div>
+                <h3 class="product-title">Ar Condicionado Elgin Split Hi Wall 30000btus Eco Dream Connect Inverter Frio 220v </h3>
+                <a href="orcamento.html" class="btn-buy">Solicite o Orçamento</a>
+            </article>
+
+               <article class="product-card">
+                <div class="product-image-container">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/1109281709226050/594628.jpg" alt="Ar Condicionado Portátil 10.000 BTU">
+                </div>
+                <h3 class="product-title">Ar Condicionado Samsung Split Teto 47000btus Connect Inverter Quente e Frio 220V </h3>
+                <a href="orcamento.html" class="btn-buy">Solicite o Orçamento</a>
+            </article>
+
+        </div>
+    </main>
+
+   <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>RMN Souza Comércio e Serviços</h4>
+                <p>Tecnologia e soluções completas para transformar seu lar ou otimizar sua empresa.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Departamentos</h4>
+                <ul>
+                    <li><a href="climatizacao.html">Climatização</a></li>
+                    <li><a href="informatica.html">Informática</a></li>
+                    <li><a href="ferramentas.html">Ferramentas</a></li>
+                    <li><a href="papelaria.html">Papelaria</a></li>
+                    <li><a href="refrigeradores.html">Refrigeradores</a></li>
+                    <li><a href="eletroportateis.html">Eletroportáteis</a></li>
+                    <li><a href="moveis-escritorio.html">Móveis de Escritório</a></li>
+                    <li><a href="audio.html">Áudio</a></li>
+                    <li><a href="servicos-seguranca.html">Segurança & Redes</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Atendimento</h4>
+                <ul>
+                    <li><a href="tel:5581994162132"><i class="fa-solid fa-phone"></i> (81) 99416-2132</a></li>
+                    <li><a href="mailto:contato@primetech.com"><i class="fa-solid fa-envelope"></i> contato@primetech.com</a></li>
+                    <li><i class="fa-solid fa-location-dot"></i> Joaquim Nabuco, PE - Brasil</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 RMN Souza Comércio e Serviços LTDA. Todos os direitos reservados.
+            <p class="dev-credit">Desenvolvido por <a href="portfolio.html" target="_blank">Wilkson Lima</a></p>
+        </div>
+    </footer>
+    <script src="products.js"></script>
+    <script src="site.js"></script>
+</body>
+</html>

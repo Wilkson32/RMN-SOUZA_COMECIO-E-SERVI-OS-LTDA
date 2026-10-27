@@ -1,0 +1,115 @@
+/* RMN Souza — estilos compartilhados (orçamento, busca, login, avisos) */
+.btn-cart{position:relative}
+.cart-badge{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;
+  background:#ff5000;color:#fff;font-size:11px;font-weight:700;line-height:20px;text-align:center;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);font-family:inherit}
+.cart-badge[hidden]{display:none}
+.pt-toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,20px);background:#0f172a;color:#fff;
+  padding:12px 20px;border-radius:12px;font:600 14px/1.4 'Instrument Sans',sans-serif;z-index:2000;opacity:0;
+  pointer-events:none;transition:.3s;box-shadow:0 10px 30px rgba(0,0,0,.3);display:flex;gap:12px;align-items:center}
+.pt-toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.pt-toast a{color:#86efac;text-decoration:underline}
+
+.page-main{padding:40px 20px 20px;min-height:60vh}
+.page-title{font-size:1.8rem;margin-bottom:6px;display:flex;align-items:center;gap:12px}
+.page-sub{color:#64748b;margin-bottom:28px}
+.empty-state{text-align:center;padding:50px 20px;color:#64748b}
+.empty-state i{font-size:3rem;margin-bottom:12px;display:block}
+.empty-state h2{color:#0f172a;margin-bottom:8px}
+.btn-primary-lg{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#16a34a;color:#fff;
+  border:0;padding:14px 24px;border-radius:10px;font:700 15px 'Instrument Sans',sans-serif;cursor:pointer;
+  text-decoration:none;margin-top:14px;transition:.2s}
+.btn-primary-lg:hover{background:#15803d}
+.btn-ghost{background:none;border:1px solid #cbd5e1;color:#475569;padding:10px 18px;border-radius:10px;cursor:pointer;
+  font:600 14px 'Instrument Sans',sans-serif;margin-top:10px;display:inline-flex;gap:8px;align-items:center}
+.btn-ghost:hover{background:#f1f5f9}
+
+.result-card .cat-tag{display:inline-block;background:#eef2ff;color:#4338ca;font-size:12px;font-weight:700;
+  padding:3px 10px;border-radius:999px;margin-bottom:8px;text-decoration:none}
+
+.quote-layout{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start}
+.quote-list{display:flex;flex-direction:column;gap:12px}
+.q-item{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:14px}
+.q-item img{width:72px;height:72px;object-fit:contain;flex:none;background:#f8fafc;border-radius:8px}
+.q-item .q-noimg{width:72px;height:72px;flex:none;background:#f1f5f9;border-radius:8px;display:flex;
+  align-items:center;justify-content:center;color:#94a3b8;font-size:24px}
+.q-info{flex:1;min-width:0}
+.q-info a{font-weight:600;color:#0f172a;text-decoration:none;display:block;font-size:14px}
+.q-info small{color:#64748b}
+.q-qty{display:flex;align-items:center;gap:8px}
+.q-qty button{width:30px;height:30px;border-radius:8px;border:1px solid #cbd5e1;background:#fff;cursor:pointer;font-weight:700}
+.q-qty button:hover{background:#f1f5f9}
+.q-rm{background:none;border:0;color:#dc2626;cursor:pointer;font-size:16px}
+.quote-form{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:22px;position:sticky;top:150px}
+.quote-form h2,.auth-card h1{font-size:1.15rem}
+.quote-form label,.auth-card label{display:block;font-size:13px;font-weight:600;margin-top:14px;color:#334155}
+.quote-form input,.quote-form textarea,.auth-card input{width:100%;margin-top:6px;padding:11px 13px;border:1px solid #cbd5e1;
+  border-radius:8px;font:14px 'Instrument Sans',sans-serif;outline:none}
+.quote-form input:focus,.quote-form textarea:focus,.auth-card input:focus{border-color:#0033c6;box-shadow:0 0 0 3px rgba(0,51,198,.15)}
+.quote-form .btn-primary-lg{width:100%}.quote-form .btn-ghost{width:100%;justify-content:center}
+.auth-card{max-width:440px;margin:0 auto;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:32px}
+.auth-card .btn-primary-lg{width:100%}.auth-card .btn-ghost{width:100%;justify-content:center}
+.auth-note{font-size:12px;color:#94a3b8;margin-top:18px;text-align:center}
+@media(max-width:820px){.quote-layout{grid-template-columns:1fr}.quote-form{position:static}}
+
+/* ===== Responsivo: celular, tablet e notebook (aplicado a todas as páginas) ===== */
+html{-webkit-text-size-adjust:100%}
+body{overflow-x:hidden}
+img,video{max-width:100%}
+.btn-action,.btn-add-cart,.btn-buy,.btn-cta,.chip,.btn-departamentos{min-height:44px}
+.dropdown-menu.is-open{display:block!important}
+.nav-links,.categories-chips{-webkit-overflow-scrolling:touch}
+.nav-links li{flex:none}
+
+/* telas sensíveis ao toque: menu abre no clique, não no hover */
+@media (hover:none){
+  .departamentos-container:hover .dropdown-menu{display:none!important}
+  .departamentos-container .dropdown-menu.is-open,
+  .departamentos-container .dropdown-menu.is-active{display:block!important}
+}
+
+/* tablet e celular */
+@media (max-width:900px){
+  .top-header{position:static!important}
+  .header-main-row{flex-direction:column!important;align-items:stretch!important;gap:12px!important}
+  .logo{justify-content:center}
+  .search-bar{max-width:100%!important;width:100%}
+  .user-actions{justify-content:center;flex-wrap:wrap}
+  .header-nav-row{flex-direction:column!important;align-items:stretch!important;gap:10px!important}
+  .departamentos-container{width:100%}
+  .btn-departamentos{width:100%;justify-content:center;border-radius:8px!important}
+  .dropdown-menu{position:static!important;width:100%!important;min-width:0!important;box-shadow:none!important;border:1px solid #e2e8f0;margin-top:6px;border-radius:8px!important}
+  .nav-links{flex-wrap:nowrap!important;overflow-x:auto;justify-content:flex-start!important;gap:18px!important;padding:4px 0 10px}
+  .hero-banner{padding:32px 20px!important;flex-direction:column;align-items:flex-start!important}
+  .hero-banner h1{font-size:1.6rem!important}
+  .section-title h2{font-size:1.25rem!important}
+  .container{padding-left:16px!important;padding-right:16px!important}
+  .footer-grid{gap:28px!important}
+  .whatsapp-btn{bottom:16px!important;right:16px!important;width:52px!important;height:52px!important}
+  .page-main{padding:28px 16px 16px}
+  .quote-form{position:static!important}
+}
+
+/* celular: 2 colunas de produtos */
+@media (max-width:600px){
+  .product-grid,.products-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+  .product-card{padding:12px!important}
+  .product-img,.product-image-container,.product-icon{height:120px!important}
+  .product-icon{font-size:40px!important}
+  .product-title{font-size:13px!important;height:auto!important;-webkit-line-clamp:3}
+  .product-desc{font-size:12px!important}
+  .btn-add-cart,.btn-buy{font-size:12px!important;padding:10px 6px!important;text-align:center}
+  .badge-discount{top:8px!important;left:8px!important;font-size:10px!important}
+  .promo-bar{font-size:11px!important}
+  .q-item{flex-wrap:wrap}
+  .pt-toast{width:calc(100% - 32px);bottom:80px}
+}
+@media (max-width:380px){
+  .product-grid,.products-grid{grid-template-columns:1fr!important}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== Logo RMN Souza no cabeçalho ===== */
+.logo{background:none!important;-webkit-text-fill-color:initial!important}
+.logo .logo-img{display:block;height:64px;width:auto;background:#fff;border-radius:10px;padding:4px 10px}
+@media (max-width:900px){.logo .logo-img{height:56px}}

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papelaria & Material de Escritório | RMN Souza</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --main-foreground: #0f172a; 
+            --main-background: #f8fafc;
+            --card-background: #ffffff;
+            --button-background: #16a34a; 
+            --button-hover: #15803d;
+            --header-background: #0033c6; 
+            --header-dark: #002288;
+            --footer-background: #0f172a;
+            --accent-orange: #ff5000; 
+            --accent-orange-hover: #e04600;
+            --heading-font: "Libre Baskerville", serif; 
+            --body-font: "Instrument Sans", sans-serif;
+            --border-radius: 12px; 
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 30px rgba(0,0,0,0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--body-font); background: var(--main-background); color: var(--main-foreground); line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: var(--heading-font); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        .promo-bar { background: #1e293b; color: #f8fafc; text-align: center; font-size: 13px; padding: 6px 10px; font-weight: 500; }
+        .promo-bar span { color: var(--accent-orange); font-weight: 700; }
+
+        .top-header { background: var(--header-background); color: white; padding: 15px 0 0; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-md); }
+        .header-main-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 15px; }
+        .logo { font-size: 26px; font-weight: 800; text-decoration: none; color: white; display: flex; align-items: center; gap: 10px; letter-spacing: -0.5px; }
+        .logo i { color: var(--accent-orange); }
+
+        .search-bar { display: flex; flex-grow: 1; max-width: 550px; position: relative; }
+        .search-bar input { width: 100%; padding: 12px 45px 12px 20px; border-radius: 25px; border: none; outline: none; font-size: 14px; box-shadow: var(--shadow-sm); }
+        .search-bar button { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--header-background); font-size: 16px; }
+
+        .user-actions { display: flex; gap: 12px; }
+        .btn-action { color: white; text-decoration: none; font-weight: 600; font-size: 14px; padding: 10px 18px; border-radius: 25px; display: inline-flex; align-items: center; gap: 8px; transition: var(--transition); }
+        .btn-login { background: var(--accent-orange); }
+        .btn-login:hover { background: var(--accent-orange-hover); transform: translateY(-2px); }
+        .btn-cart { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px); }
+        .btn-cart:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+
+        .header-nav-row { display: flex; gap: 25px; align-items: center; }
+        .departamentos-container { position: relative; }
+        .btn-departamentos { background: var(--header-dark); color: white; border: none; padding: 12px 22px; font-weight: 700; border-radius: 8px 8px 0 0; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 14px; }
+        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 260px; box-shadow: var(--shadow-lg); border-radius: 0 0 12px 12px; overflow: hidden; z-index: 10; }
+        .departamentos-container:hover .dropdown-menu { display: block; animation: fadeIn 0.2s ease; }
+        .dropdown-menu a { color: #334155; padding: 14px 20px; text-decoration: none; display: flex; align-items: center; gap: 12px; font-weight: 500; transition: var(--transition); }
+        .dropdown-menu a:hover { background: #f1f5f9; color: var(--header-background); padding-left: 25px; }
+
+        .nav-links { display: flex; gap: 20px; list-style: none; overflow-x: auto; }
+        .nav-links a { color: white; text-decoration: none; font-size: 14px; font-weight: 600; opacity: 0.85; transition: var(--transition); white-space: nowrap; }
+        .nav-links a:hover, .nav-links a.active { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+
+        .quick-categories { padding: 25px 0; }
+        .categories-chips { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
+        .categories-chips::-webkit-scrollbar { display: none; }
+        .chip { background: white; color: #475569; padding: 10px 22px; border-radius: 25px; text-decoration: none; font-size: 14px; font-weight: 600; white-space: nowrap; box-shadow: var(--shadow-sm); border: 1px solid #e2e8f0; transition: var(--transition); }
+        .chip:hover { border-color: var(--header-background); color: var(--header-background); transform: translateY(-2px); }
+        .chip.active { background: var(--header-background); color: white; border-color: var(--header-background); }
+
+        .hero-banner { background: linear-gradient(135deg, #0033c6 0%, #1e40af 100%); color: white; padding: 60px 40px; border-radius: var(--border-radius); display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-md); position: relative; overflow: hidden; margin-bottom: 40px; }
+        .hero-content { max-width: 600px; z-index: 2; }
+        .hero-tag { background: rgba(255, 255, 255, 0.2); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 15px; }
+        .hero-banner h1 { font-size: 38px; line-height: 1.2; margin-bottom: 15px; }
+        .hero-banner p { font-size: 16px; opacity: 0.9; margin-bottom: 25px; }
+        .btn-cta { background: var(--accent-orange); color: white; padding: 14px 30px; border-radius: 30px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: var(--transition); box-shadow: var(--shadow-sm); }
+        .btn-cta:hover { background: var(--accent-orange-hover); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+        .section-title { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 25px; }
+        .section-title h2 { font-size: 26px; color: #0f172a; }
+
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
+        .product-card { background: var(--card-background); border-radius: var(--border-radius); padding: 20px; border: 1px solid #e2e8f0; position: relative; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between; }
+        .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .badge-discount { position: absolute; top: 15px; left: 15px; background: var(--accent-orange); color: white; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 12px; z-index: 1; }
+        
+        .product-img { width: 100%; height: 180px; object-fit: cover; margin-bottom: 15px; background: #f8fafc; border-radius: 8px; padding: 10px; display: block; }
+        .product-title { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 15px; line-height: 1.4; height: 42px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .btn-add-cart { width: 100%; background: var(--button-background); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: var(--transition); text-decoration: none; margin-top: auto; }
+        .btn-add-cart:hover { background: var(--button-hover); }
+
+        footer { background: var(--footer-background); color: #94a3b8; padding: 50px 0 20px; margin-top: 60px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; }
+        .footer-col h4 { color: white; margin-bottom: 20px; font-size: 18px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col a { color: #94a3b8; text-decoration: none; transition: var(--transition); }
+        .footer-col a:hover { color: white; }
+        .social-icons { display: flex; gap: 15px; margin-top: 15px; }
+        .social-icons a { width: 38px; height: 38px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
+        .social-icons a:hover { background: var(--accent-orange); }
+
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid #334155; font-size: 13px; margin-top: 40px; }
+        .dev-credit a { color: white; font-weight: 600; text-decoration: none; }
+        .dev-credit a:hover { text-decoration: underline; }
+
+        .whatsapp-btn { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: var(--shadow-lg); text-decoration: none; z-index: 999; transition: var(--transition); }
+        .whatsapp-btn:hover { transform: scale(1.1); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+    <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+    <div class="promo-bar">
+        ⚡ MATERIAIS ESCOLARES E DE ESCRITÓRIO: <span>Orçamento rápido</span> para compras corporativas!
+    </div>
+
+    <header class="top-header">
+        <div class="container">
+            <div class="header-main-row">
+                <a href="index.html" class="logo" aria-label="RMN Souza Comércio e Serviços LTDA"><img src="img/logo-rmn.png" alt="RMN Souza Comércio e Serviços LTDA" class="logo-img"></a>
+                <form class="search-bar" action="busca.html" method="GET">
+                    <input type="text" name="q" placeholder="Buscar cadernos, papéis, canetas...">
+                    <button type="submit" aria-label="Pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="user-actions">
+                    <a href="login.html" class="btn-action btn-login">
+                        <i class="fa-solid fa-user"></i> Entrar
+                    </a>
+                    <a href="orcamento.html" class="btn-action btn-cart">
+                        <i class="fa-solid fa-cart-shopping"></i> Carrinho
+                    </a>
+                </div>
+            </div>
+            <div class="header-nav-row">
+                <div class="departamentos-container">
+                    <button class="btn-departamentos"><i class="fa-solid fa-bars"></i> DEPARTAMENTOS</button>
+                    <nav class="dropdown-menu">
+                        <a href="climatizacao.html"><i class="fa-solid fa-snowflake"></i> Climatização</a>
+                        <a href="informatica.html"><i class="fa-solid fa-laptop"></i> Informática</a>
+                        <a href="ferramentas.html"><i class="fa-solid fa-screwdriver-wrench"></i> Ferramentas</a>
+                        <a href="papelaria.html"><i class="fa-solid fa-scroll"></i> Papelaria</a>
+                        <a href="refrigeradores.html"><i class="fa-solid fa-kitchen-set"></i> Refrigeradores</a>
+                        <a href="eletroportateis.html"><i class="fa-solid fa-plug"></i> Eletroportáteis</a>
+                        <a href="moveis-escritorio.html"><i class="fa-solid fa-chair"></i> Móveis de Escritório</a>
+                        <a href="audio.html"><i class="fa-solid fa-headphones"></i> Áudio</a>
+                        <a href="servicos-seguranca.html"><i class="fa-solid fa-video"></i> Segurança & Redes</a>
+                    </nav>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="climatizacao.html">Climatização</a></li>
+                    <li><a href="informatica.html">Informática</a></li>
+                    <li><a href="ferramentas.html">Ferramentas</a></li>
+                    <li><a href="papelaria.html" class="active">Papelaria</a></li>
+                    <li><a href="refrigeradores.html">Refrigeradores</a></li>
+                    <li><a href="eletroportateis.html">Eletroportáteis</a></li>
+                    <li><a href="moveis-escritorio.html">Móveis de Escritório</a></li>
+                    <li><a href="audio.html">Áudio</a></li>
+                    <li><a href="servicos-seguranca.html">Segurança & Redes</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section class="quick-categories">
+        <div class="container">
+            <div class="categories-chips">
+                <a href="index.html" class="chip">Todos os Produtos</a>
+                <a href="climatizacao.html" class="chip">❄️ Climatização</a>
+                <a href="informatica.html" class="chip">💻 Informática</a>
+                <a href="ferramentas.html" class="chip">🛠️ Ferramentas</a>
+                <a href="papelaria.html" class="chip active">📜 Papelaria</a>
+                <a href="refrigeradores.html" class="chip">🧊 Refrigeradores</a>
+                <a href="eletroportateis.html" class="chip">🔌 Eletroportáteis</a>
+                <a href="moveis-escritorio.html" class="chip">🪑 Móveis de Escritório</a>
+                <a href="audio.html" class="chip">🎧 Áudio</a>
+                <a href="servicos-seguranca.html" class="chip">📹 Segurança & Redes</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+
+        <section class="hero-banner">
+            <div class="hero-content">
+                <span class="hero-tag">Organização & Produtividade</span>
+                <h1>Tudo em Papelaria e Suprimentos de Escritório</h1>
+                <p>Papéis, organização, materiais para escritório e escolares das melhores marcas com entrega rápida.</p>
+                <a href="#produtos" class="btn-cta">Confira os Produtos <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </section>
+
+        <section id="produtos">
+            <div class="section-title">
+                <h2>Destaques em Papelaria</h2>
+            </div>
+
+            <div class="product-grid">
+                <!-- Produto 1 -->
+                <div class="product-card">
+                    <span class="badge-discount">-15% OFF</span>
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/771301756214955/408824.jpg" alt="" class="">
+                    <h3 class="product-title">Papel Chamex Office Branco 500 Folhas</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="product-card">
+                    <span class="badge-discount">Mais Vendido</span>
+                    <img src="https://m.media-amazon.com/images/I/61UBBI6XfYL._AC_SX522_.jpg" alt="Chamex, Caixa com 10 Pacotes x 500 Folhas cada" class="product-img">
+                    <h3 class="product-title">Chamex, Caixa com 10 Pacotes x 500 Folhas cada</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/136971491925729/461598.jpg" alt="Caderno 1/4 Costurado Capa Dura Amarelo 48 Folhas" class="product-img">
+                    <h3 class="product-title">Caderno 1/4 Costurado Capa Dura Amarelo 48 Folhas</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="product-card">
+                    <span class="badge-discount">-10% OFF</span>
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/133001491925786/461601.jpg" alt="Caderno 1/4 Costurado Capa Dura Azul 48 Folhas" class="product-img">
+                    <h3 class="product-title">Caderno 1/4 Costurado Capa Dura Azul 48 Folhas</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 5 -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/135281491925887/461628.jpg" alt="Caderno 1/4 Costurado Capa Dura Vermelho 48 Folhas" class="product-img">
+                    <h3 class="product-title">Caderno 1/4 Costurado Capa Dura Vermelho 48 Folhas</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 6 -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/2129691694612101/586749.jpg" alt="Caderno Universitário Capa Dura 10x1 Longboard 160 Folhas" class="product-img">
+                    <h3 class="product-title">Caderno Universitário Capa Dura 10x1 Longboard 160 Folhas</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 7 -->
+                <div class="product-card">
+                    <span class="badge-discount">Oferta</span>
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/1167361786450141/568171.jpg" alt="Caderno Universitário Capa Dura 01x1 Cosmos 80 Folhas" class="product-img">
+                    <h3 class="product-title">Caderno Universitário Capa Dura 01x1 Cosmos 80 Folhas</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 8 -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/1257951622580611/022802.jpg" alt="Borracha Branca Mercur Record 40 3 Unidades" class="product-img">
+                    <h3 class="product-title">Borracha Branca Mercur Record 40 3 Unidades</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                 <!-- Produto 9 -->
+                <div class="product-card">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_2X_913758-MLB116773553190_092026-F-caixa-lapis-preto-hb-144-unidades-sextavado-escolar-atacado.webp" alt="Caixa Lápis Preto Hb 144 Unidades Sextavado Escolar" class="product-img">
+                    <h3 class="product-title">Caixa Lápis Preto Hb 144 Unidades Sextavado Escolar</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                  <!-- Produto 10 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/253931/01_253931_01.jpg?v=280520253417&ims=1500x" alt="Fita Empacotamento Pratik 48mm x 45m Transparente - Embalagem com 5 Unidades" class="product-img">
+                    <h3 class="product-title">Fita Empacotamento Pratik 48mm x 45m Transparente - Embalagem com 5 Unidades</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 12 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/120702/01_120702_01.jpg?v=130820261629&ims=1500x" alt="Marcador Permanente Compactor Preto - Embalagem com 12 Unidades" class="product-img">
+                    <h3 class="product-title">Marcador Permanente Compactor Preto - Embalagem com 12 Unidades</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 13 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/221684/01_221684_01.jpg?v=010320250252&ims=1500x" alt="Cola Bastão Cis Fix 8g - Embalagem com 12 Unidades" class="product-img">
+                    <h3 class="product-title">Cola Bastão Cis Fix 8g - Embalagem com 12 Unidades</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+
+                <!-- Produto 14 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/104286/01_104286_01.jpg?v=080420253616&ims=1500x" alt="Estilete Estreito Premium 18mm - Embalagem com 12 Unidades" class="product-img">
+                    <h3 class="product-title">Estilete Estreito Premium 18mm - Embalagem com 12 Unidades</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+
+                <!-- Produto 16 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/437329/01_437329_01.jpg?v=260820253744&ims=1500x" alt="Gominha Amarelo Mercur 8,5Cmx1,2Mm Pct Com 500" class="product-img">
+                    <h3 class="product-title">Gominha Amarelo Mercur 8,5Cmx1,2Mm Pct Com 500</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                 <!-- Produto 17 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/11112/01_11112_01.jpg?v=130820260441&ims=1500x" alt="Grampeador Cis Mesa Metálico Preto Plus Line 26/6 Para 20 Folhas Pequeno" class="product-img">
+                    <h3 class="product-title">Grampeador Cis Mesa Metálico Preto Plus Line 26/6 Para 20 Folhas Pequeno</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                 <!-- Produto 18 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/487911/01_487911_01.jpg?v=190620242020&ims=1500x" alt="Pasta Pp 4Cm C/Aba El. Plascony Azu" class="product-img">
+                    <h3 class="product-title">Pasta Pp 4Cm C/Aba El. Plascony Azu</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                 <!-- Produto 19 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/645085/01_645085_01.jpg?v=220620265228&ims=1500x" alt="Durex 10Mx12mm Fit-Pel" class="product-img">
+                    <h3 class="product-title">Durex 10Mx12mm Fit-Pel</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                 <!-- Produto 20 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/653267/01_653267_01.jpg?v=120620261950&ims=1500x" alt="Pasta Az Registrador Tradicional Largo Und Polycart" class="product-img">
+                    <h3 class="product-title">Pasta Az Registrador Tradicional Largo Und Polycart</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 21 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/656118/01_656118_01.jpg?v=170620261951&ims=1500x" alt="Pasta Arquivo Morto Branco/Multionda - Und. - Alaplast" class="product-img">
+                    <h3 class="product-title">Pasta Arquivo Morto Branco/Multionda - Und. - Alaplast</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 22 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/651393/01_651393_01.jpg?v=300520264908&ims=1500x" alt="Grampeador Metal 100F Und Onda" class="product-img">
+                    <h3 class="product-title">Grampeador Metal 100F Und Onda</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 23 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/653258/01_653258_01.jpg?v=120620261950&ims=1500x" alt="Apagador Para Quadro Branco - Radex" class="product-img">
+                    <h3 class="product-title">Apagador Para Quadro Branco - Radex</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 24 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/654539/01_654539_01.jpg?v=130620260114&ims=1500x" alt="Pasta Arquivo Morto Amarelo/Multionda - Und. - Alaplast" class="product-img">
+                    <h3 class="product-title">Pasta Arquivo Morto Amarelo/Multionda - Und. - Alaplast</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 25 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/214203/01_214203_01.jpg?v=150820241732&ims=1500x" alt="Removedor Magico 5L Start" class="product-img">
+                    <h3 class="product-title">Removedor Magico 5L Start</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 26 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/497710/01_497710_01.jpg?v=040620265610&ims=1500x" alt="Suporte P/Durex Medio Cis Anti-Derra S-50" class="product-img">
+                    <h3 class="product-title">Suporte P/Durex Medio Cis Anti-Derra S-50</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+
+                <!-- Produto 27 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/654544/01_654544_01.jpg?v=141020265551&ims=1500x" alt="Bloco Adesivo An. Mp2014 75Mmx75mm Neon Amarelo 1X100 Masterprint" class="product-img">
+                    <h3 class="product-title">Bloco Adesivo An. Mp2014 75Mmx75mm Neon Amarelo 1X100 Masterprint</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+
+                <!-- Produto 28 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/670632/01_670632_01.jpg?v=240720261800&ims=1500x" alt="Perfurador De Metal Mp-801 Pequeno Ate 20 Folhas - Masterprint" class="product-img">
+                    <h3 class="product-title">Perfurador De Metal Mp-801 Pequeno Ate 20 Folhas - Masterprint</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 29 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/662046/01_662046_01.jpg?v=010720262559&ims=1500x" alt="Porta Objetos Dellocolor Fume - Dello" class="product-img">
+                    <h3 class="product-title">Porta Objetos Dellocolor Fume - Dello</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 30 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/256473/01_256473_01.jpg?v=171020261915&ims=1500x" alt="Tesoura Thompson uso Geral 5,5P 14cm" class="product-img">
+                    <h3 class="product-title">Tesoura Thompson uso Geral 5,5P 14cm</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 31 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/37116/01_37116_01.jpg?v=171020265936&ims=1500x" alt="Tesoura Tramontina Supercort Uso Geral 7P Cores Sortidas" class="product-img">
+                    <h3 class="product-title">Tesoura Tramontina Supercort Uso Geral 7P Cores Sortidas</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 32 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/610515/01_610515_01.jpg?v=250520261830&ims=1500x" alt="Marca Texto Bic Amarelo - Embalagem com 12 Unidades" class="product-img">
+                    <h3 class="product-title">Marca Texto Bic Amarelo - Embalagem com 12 Unidades</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Produto 33 -->
+                <div class="product-card">
+                    <img src="https://imgprd.martinsatacado.com.br/catalogoimg/258272/01_258272_01.jpg?v=250720260147&ims=1500x" alt="Caneta Cis Esferográfica Spiro 0,7mm Azul/Preto - Embalagem com 24 Unidades" class="product-img">
+                    <h3 class="product-title">Caneta Cis Esferográfica Spiro 0,7mm Azul/Preto - Embalagem com 24 Unidades</h3>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+
+
+
+            </div>
+        </section>
+
+    </main>
+
+    <a href="https://wa.me/5581994162132" class="whatsapp-btn" target="_blank" title="Fale conosco no WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>RMN Souza Comércio e Serviços</h4>
+                <p>Tecnologia e soluções completas para transformar seu lar ou otimizar sua empresa.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Departamentos</h4>
+                <ul>
+                    <li><a href="climatizacao.html">Climatização</a></li>
+                    <li><a href="informatica.html">Informática</a></li>
+                    <li><a href="ferramentas.html">Ferramentas</a></li>
+                    <li><a href="papelaria.html">Papelaria</a></li>
+                    <li><a href="refrigeradores.html">Refrigeradores</a></li>
+                    <li><a href="eletroportateis.html">Eletroportáteis</a></li>
+                    <li><a href="moveis-escritorio.html">Móveis de Escritório</a></li>
+                    <li><a href="audio.html">Áudio</a></li>
+                    <li><a href="servicos-seguranca.html">Segurança & Redes</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Atendimento</h4>
+                <ul>
+                    <li><a href="tel:5581994162132"><i class="fa-solid fa-phone"></i> (81) 99416-2132</a></li>
+                    <li><a href="mailto:contato@primetech.com"><i class="fa-solid fa-envelope"></i> contato@primetech.com</a></li>
+                    <li><i class="fa-solid fa-location-dot"></i> Joaquim Nabuco, PE - Brasil</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 RMN Souza Comércio e Serviços LTDA. Todos os direitos reservados.
+            <p class="dev-credit">Desenvolvido por <a href="portfolio.html" target="_blank">Wilkson Lima</a></p>
+        </div>
+    </footer>
+
+    <script src="products.js"></script>
+    <script src="site.js"></script>
+</body>
+</html>

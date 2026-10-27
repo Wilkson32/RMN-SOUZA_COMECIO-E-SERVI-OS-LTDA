@@ -1,0 +1,508 @@
+/* ==========================================================================
+   NOVO DESIGN UNIFICADO - RMN SOUZA (VERSÃO 2.0)
+   ========================================================================== */
+
+/* 1. VARIÁVEIS DE DESIGN E TEMAS */
+:root {
+    --primary: #6366f1;           /* Indigo / Violeta Principal */
+    --primary-hover: #4f46e5;     /* Indigo Escuro */
+    --accent: #10b981;            /* Verde Esmeralda (Destaque/Preço) */
+    --accent-hover: #059669;
+    
+    --bg-dark: #0f172a;           /* Cabeçalho e Rodapé */
+    --bg-surface: #1e293b;        /* Elementos secundários escuros */
+    --bg-body: #f8fafc;           /* Fundo principal da página */
+    --bg-card: #ffffff;           /* Fundo dos cards */
+    
+    --text-heading: #0f172a;
+    --text-body: #334155;
+    --text-muted: #64748b;
+    --text-light: #f8fafc;
+    
+    --border-color: #e2e8f0;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-full: 9999px;
+    
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+    --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+    --shadow-hover: 0 20px 30px -10px rgba(99, 102, 241, 0.2);
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. RESET E NORMALIZE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* 3. CABEÇALHO (TOP HEADER) */
+.top-header {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    padding: 16px 0 8px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.header-main-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 14px;
+}
+
+/* Logo com gradiente e animação */
+.logo {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #a5b4fc, var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+}
+
+.logo i {
+    color: var(--primary);
+    -webkit-text-fill-color: initial;
+}
+
+.logo:hover {
+    transform: scale(1.02);
+}
+
+/* Barra de Busca Moderna */
+.search-bar {
+    display: flex;
+    flex: 1;
+    max-width: 540px;
+    position: relative;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 12px 18px;
+    background-color: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+    color: #fff;
+    outline: none;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.search-bar input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-bar input:focus {
+    border-color: var(--primary);
+    background-color: #1e293b;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.search-bar button {
+    background-color: var(--primary);
+    border: none;
+    padding: 0 22px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+.search-bar button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Ações de Conta / Carrinho */
+.user-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.btn-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-light);
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn-action:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* Navegação Secundária */
+.header-nav-row {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 10px;
+}
+
+/* Menu Dropdown Departamentos */
+.departamentos-container {
+    position: relative;
+}
+
+.btn-departamentos {
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.btn-departamentos:hover {
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background-color: var(--bg-card);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    min-width: 240px;
+    overflow: hidden;
+    z-index: 100;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.departamentos-container:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    color: var(--text-heading);
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-bottom: 1px solid #f1f5f9;
+    transition: var(--transition);
+}
+
+.dropdown-menu a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu a i {
+    color: var(--primary);
+}
+
+.dropdown-menu a:hover {
+    background-color: #f1f5f9;
+    color: var(--primary);
+    padding-left: 24px;
+}
+
+/* Links do Topo */
+.nav-links {
+    display: flex;
+    gap: 24px;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 6px 0;
+    position: relative;
+    transition: var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #fff;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: var(--transition);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+/* 4. SEÇÃO DE CHIPS / FILTROS RÁPIDOS */
+.quick-categories {
+    padding: 16px 0;
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.categories-chips {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+}
+
+.chip {
+    background-color: #f1f5f9;
+    padding: 8px 20px;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-body);
+    border: 1px solid transparent;
+    transition: var(--transition);
+}
+
+.chip:hover,
+.chip.active {
+    background-color: var(--primary);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+
+/* 5. ÁREA DE CONTEÚDO PRINCIPAL & BANNERS */
+main {
+    padding: 40px 0;
+    min-height: 70vh;
+}
+
+.hero-banner {
+    background: linear-gradient(135deg, var(--bg-dark), #1e1b4b);
+    color: #fff;
+    padding: 50px 40px;
+    border-radius: var(--radius-md);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 40px;
+}
+
+.hero-banner h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+    background: linear-gradient(to right, #ffffff, #c7d2fe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-banner p {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Grid de Produtos */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.product-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition);
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: var(--shadow-hover);
+}
+
+.product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    margin-bottom: 16px;
+    transition: var(--transition);
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+.product-card h3 {
+    font-size: 1.05rem;
+    color: var(--text-heading);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.product-card .price {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin: 12px 0;
+}
+
+.btn-buy {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: var(--primary);
+    color: #fff;
+    padding: 12px 0;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.btn-buy:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* 6. RODAPÉ (FOOTER) */
+footer {
+    background-color: var(--bg-dark);
+    color: var(--text-muted);
+    padding: 60px 0 30px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 60px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-col h4 {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col a {
+    transition: var(--transition);
+}
+
+.footer-col a:hover {
+    color: var(--primary);
+    padding-left: 4px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.875rem;
+}
+
+/* 7. ADAPTAÇÕES PARA CELULAR E TABLET */
+@media (max-width: 900px) {
+    .header-main-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-bar {
+        max-width: 100%;
+    }
+
+    .header-nav-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .nav-links {
+        justify-content: space-between;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .hero-banner {
+        padding: 30px 20px;
+    }
+
+    .hero-banner h1 {
+        font-size: 1.8rem;
+    }
+}

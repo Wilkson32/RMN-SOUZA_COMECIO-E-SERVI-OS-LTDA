@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informática | RMN Souza</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    
+    <!-- SEO & Open Graph -->
+    <meta name="description" content="Encontre os melhores Notebooks, Desktops, Projetores, Monitores e acessórios de informática na RMN Souza. Descontos exclusivos e frete rápido.">
+    <meta property="og:title" content="Informática | RMN Souza">
+    <meta property="og:description" content="Notebooks, Desktops, Projetores e Monitores com envio rápido e garantia total.">
+    <meta property="og:image" content="https://primetech.com/img/og-informatica.jpg">
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --main-foreground: #0f172a; 
+            --main-background: #f8fafc;
+            --card-background: #ffffff;
+            --button-background: #16a34a; 
+            --button-hover: #15803d;
+            --header-background: #0033c6; 
+            --header-dark: #002288;
+            --footer-background: #0f172a;
+            --accent-orange: #ff5000; 
+            --accent-orange-hover: #e04600;
+            --heading-font: "Libre Baskerville", serif; 
+            --body-font: "Instrument Sans", sans-serif;
+            --border-radius: 12px; 
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 30px rgba(0,0,0,0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--body-font); background: var(--main-background); color: var(--main-foreground); line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: var(--heading-font); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        .promo-bar { background: #1e293b; color: #f8fafc; text-align: center; font-size: 13px; padding: 6px 10px; font-weight: 500; }
+        .promo-bar span { color: var(--accent-orange); font-weight: 700; }
+
+        .top-header { background: var(--header-background); color: white; padding: 15px 0 0; position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow-md); }
+        .header-main-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 15px; }
+        .logo { font-size: 26px; font-weight: 800; text-decoration: none; color: white; display: flex; align-items: center; gap: 10px; letter-spacing: -0.5px; }
+        .logo i { color: var(--accent-orange); }
+
+        .search-bar { display: flex; flex-grow: 1; max-width: 550px; position: relative; }
+        .search-bar input { width: 100%; padding: 12px 45px 12px 20px; border-radius: 25px; border: none; outline: none; font-size: 14px; box-shadow: var(--shadow-sm); }
+        .search-bar button { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--header-background); font-size: 16px; }
+
+        .user-actions { display: flex; gap: 12px; }
+        .btn-action { color: white; text-decoration: none; font-weight: 600; font-size: 14px; padding: 10px 18px; border-radius: 25px; display: inline-flex; align-items: center; gap: 8px; transition: var(--transition); }
+        .btn-login { background: var(--accent-orange); }
+        .btn-login:hover { background: var(--accent-orange-hover); transform: translateY(-2px); }
+        .btn-cart { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px); }
+        .btn-cart:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+
+        .header-nav-row { display: flex; gap: 25px; align-items: center; }
+        .departamentos-container { position: relative; }
+        .btn-departamentos { background: var(--header-dark); color: white; border: none; padding: 12px 22px; font-weight: 700; border-radius: 8px 8px 0 0; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 14px; }
+        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 260px; box-shadow: var(--shadow-lg); border-radius: 0 0 12px 12px; overflow: hidden; z-index: 10; }
+        
+        .departamentos-container:hover .dropdown-menu,
+        .departamentos-container:focus-within .dropdown-menu,
+        .dropdown-menu.is-active { display: block; animation: fadeIn 0.2s ease; }
+
+        .dropdown-menu a { color: #334155; padding: 14px 20px; text-decoration: none; display: flex; align-items: center; gap: 12px; font-weight: 500; transition: var(--transition); }
+        .dropdown-menu a:hover, .dropdown-menu a.active-dept { background: #f1f5f9; color: var(--header-background); padding-left: 25px; font-weight: 700; }
+
+        .nav-links { display: flex; gap: 20px; list-style: none; overflow-x: auto; }
+        .nav-links a { color: white; text-decoration: none; font-size: 14px; font-weight: 600; opacity: 0.85; transition: var(--transition); white-space: nowrap; }
+        .nav-links a:hover, .nav-links a.active { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+
+        /* Banner Específico do Departamento */
+        .category-hero { background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%); color: white; padding: 45px 30px; border-radius: var(--border-radius); margin-top: 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-md); }
+        .category-hero-text h1 { font-size: 32px; margin-bottom: 10px; }
+        .category-hero-text p { font-size: 15px; opacity: 0.9; max-width: 600px; }
+
+        .quick-categories { padding: 25px 0; }
+        .categories-chips { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
+        .categories-chips::-webkit-scrollbar { display: none; }
+        .chip { background: white; color: #475569; padding: 10px 22px; border-radius: 25px; text-decoration: none; font-size: 14px; font-weight: 600; white-space: nowrap; box-shadow: var(--shadow-sm); border: 1px solid #e2e8f0; transition: var(--transition); }
+        .chip:hover { border-color: var(--header-background); color: var(--header-background); transform: translateY(-2px); }
+        .chip.active { background: var(--header-background); color: white; border-color: var(--header-background); }
+
+        .section-title { display: flex; justify-content: space-between; align-items: flex-end; margin: 30px 0 25px; }
+        .section-title h2 { font-size: 26px; color: #0f172a; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
+        .product-card { background: var(--card-background); border-radius: var(--border-radius); padding: 20px; border: 1px solid #e2e8f0; position: relative; transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between; }
+        .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .badge-discount { position: absolute; top: 15px; left: 15px; background: var(--accent-orange); color: white; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 12px; z-index: 1; }
+        
+        .product-img { width: 100%; height: 180px; object-fit: cover; margin-bottom: 15px; background: #f8fafc; border-radius: 8px; display: block; }
+        
+        .product-rating { color: #f59e0b; font-size: 12px; margin-bottom: 8px; }
+        .product-title { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 10px; line-height: 1.4; height: 42px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .price-box { margin-bottom: 15px; }
+        .old-price { font-size: 13px; color: #94a3b8; text-decoration: line-through; display: block; }
+        .current-price { font-size: 20px; font-weight: 800; color: #0f172a; }
+        .btn-add-cart { width: 100%; background: var(--button-background); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: var(--transition); text-decoration: none; }
+        .btn-add-cart:hover { background: var(--button-hover); }
+
+        .newsletter { background: #1e293b; color: white; border-radius: var(--border-radius); padding: 40px; margin-top: 60px; text-align: center; }
+        .newsletter h3 { font-size: 24px; margin-bottom: 10px; }
+        .newsletter p { color: #94a3b8; margin-bottom: 20px; }
+        .newsletter-form { display: flex; justify-content: center; gap: 10px; max-width: 500px; margin: 0 auto; }
+        .newsletter-form input { flex-grow: 1; padding: 12px 20px; border-radius: 25px; border: none; outline: none; }
+        .newsletter-form button { background: var(--accent-orange); color: white; border: none; padding: 12px 25px; border-radius: 25px; font-weight: 700; cursor: pointer; transition: var(--transition); }
+        .newsletter-form button:hover { background: var(--accent-orange-hover); }
+
+        footer { background: var(--footer-background); color: #94a3b8; padding: 50px 0 20px; margin-top: 60px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; }
+        .footer-col h4 { color: white; margin-bottom: 20px; font-size: 18px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col a { color: #94a3b8; text-decoration: none; transition: var(--transition); }
+        .footer-col a:hover { color: white; }
+        .social-icons { display: flex; gap: 15px; margin-top: 15px; }
+        .social-icons a { width: 38px; height: 38px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
+        .social-icons a:hover { background: var(--accent-orange); }
+
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid #334155; font-size: 13px; margin-top: 40px; }
+        .dev-credit a { color: white; font-weight: 600; text-decoration: none; }
+        .dev-credit a:hover { text-decoration: underline; }
+
+        .whatsapp-btn { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: var(--shadow-lg); text-decoration: none; z-index: 999; transition: var(--transition); }
+        .whatsapp-btn:hover { transform: scale(1.1); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 992px) {
+            .header-main-row { flex-direction: column; align-items: stretch; }
+            .logo { justify-content: center; }
+            .search-bar { max-width: 100%; }
+            .user-actions { justify-content: center; }
+            .header-nav-row { flex-direction: column; align-items: stretch; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 10px; padding-bottom: 10px; }
+            .btn-departamentos { width: 100%; justify-content: center; border-radius: 8px; }
+            .dropdown-menu { width: 100%; }
+            .category-hero { padding: 30px 20px; text-align: center; flex-direction: column; }
+            .category-hero h1 { font-size: 24px; }
+            .newsletter-form { flex-direction: column; }
+            .newsletter-form button { width: 100%; }
+        }
+    </style>
+    <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+    <div class="promo-bar">
+        ⚡ OFERTAS DE INFORMÁTICA: Equipamentos corporativos e gamers com até <span>30% OFF</span>!
+    </div>
+
+    <header class="top-header">
+        <div class="container">
+            <div class="header-main-row">
+                <a href="index.html" class="logo" aria-label="RMN Souza Comércio e Serviços LTDA"><img src="img/logo-rmn.png" alt="RMN Souza Comércio e Serviços LTDA" class="logo-img"></a>
+                <form class="search-bar" action="busca.html" method="GET">
+                    <input type="text" name="q" placeholder="Buscar notebooks, desktops, monitores..." aria-label="Pesquisar em Informática">
+                    <button type="submit" aria-label="Pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="user-actions">
+                    <a href="login.html" class="btn-action btn-login">
+                        <i class="fa-solid fa-user"></i> Entrar
+                    </a>
+                    <a href="orcamento.html" class="btn-action btn-cart">
+                        <i class="fa-solid fa-cart-shopping"></i> Carrinho
+                    </a>
+                </div>
+            </div>
+            <div class="header-nav-row">
+                <div class="departamentos-container">
+                    <button class="btn-departamentos" id="btn-dept" aria-expanded="false" aria-controls="menu-dept">
+                        <i class="fa-solid fa-bars"></i> DEPARTAMENTOS
+                    </button>
+                    <nav class="dropdown-menu" id="menu-dept" aria-label="Menu de Departamentos">
+                        <a href="climatizacao.html"><i class="fa-solid fa-snowflake"></i> Climatização</a>
+                        <a href="informatica.html" class="active-dept"><i class="fa-solid fa-laptop"></i> Informática</a>
+                        <a href="ferramentas.html"><i class="fa-solid fa-screwdriver-wrench"></i> Ferramentas</a>
+                        <a href="papelaria.html"><i class="fa-solid fa-scroll"></i> Papelaria</a>
+                        <a href="refrigeradores.html"><i class="fa-solid fa-kitchen-set"></i> Refrigeradores</a>
+                        <a href="eletroportateis.html"><i class="fa-solid fa-plug"></i> Eletroportáteis</a>
+                        <a href="moveis-escritorio.html"><i class="fa-solid fa-chair"></i> Móveis de Escritório</a>
+                        <a href="audio.html"><i class="fa-solid fa-headphones"></i> Áudio</a>
+                        <a href="servicos-seguranca.html"><i class="fa-solid fa-video"></i> Segurança & Redes</a>
+                    </nav>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="climatizacao.html">Climatização</a></li>
+                    <li><a href="informatica.html" class="active">Informática</a></li>
+                    <li><a href="ferramentas.html">Ferramentas</a></li>
+                    <li><a href="papelaria.html">Papelaria</a></li>
+                    <li><a href="refrigeradores.html">Refrigeradores</a></li>
+                    <li><a href="eletroportateis.html">Eletroportáteis</a></li>
+                    <li><a href="moveis-escritorio.html">Móveis de Escritório</a></li>
+                    <li><a href="audio.html">Áudio</a></li>
+                    <li><a href="servicos-seguranca.html">Segurança & Redes</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Banner do Departamento -->
+        <section class="category-hero">
+            <div class="category-hero-text">
+                <h1>💻 Informática & Tecnologia</h1>
+                <p>Encontre os melhores notebooks, desktops de alta performance, monitores ultrawide e projetores profissionais para home office ou empresa.</p>
+            </div>
+        </section>
+
+        <!-- Produtos de Informática -->
+        <section id="produtos-informatica">
+            <div class="section-title">
+                <h2>Equipamentos em Destaque</h2>
+            </div>
+
+            <div class="product-grid">
+                
+                <!-- Notebook -->
+                <div class="product-card" id="notebooks">
+                    <span class="badge-discount">-20%</span>
+                    <img src="https://m.magazineluiza.com.br/a-static/420x420/notebook-hp-256r-g9-intel-core-i3-1315u-8gb-256gb-156-windows-11-intel-uhd-graphics-bq9k8at-ak/magazineluiza/240146300/028bda56459661c286a3e7ec28614943.jpg" alt="Notebook HP 256R G9" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> (5.0)
+                    </div>
+                    <h3 class="product-title">Notebook HP 256R G9 Intel Core i3 1315U 8GB 256GB 15,6” Windows 11 Intel UHD Graphics</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Notebook Gamer / Alta Performance -->
+                <div class="product-card">
+                    <span class="badge-discount">-12%</span>
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_2X_602930-MLA111944189869_052026-F.webp" alt="Notebook Dell Vostro 15" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i> (4.8)
+                    </div>
+                    <h3 class="product-title">Notebook Dell Vostro 15, Intel® Core™ i5, 16GB RAM, SSD 512GB</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Notebook-->
+                <div class="product-card" id="desktops">
+                    <span class="badge-discount">-15%</span>
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/829731785937772/649350.jpg" alt="" class="" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.6)
+                    </div>
+                    <h3 class="product-title">Notebook Lenovo IdeaPad Slim 3 15IRU10 Intel Core 3 100U 8GB SSD 256GB 15,3" Windows 11 Home</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Notebook -->
+                <div class="product-card" id="monitores">
+                    <span class="badge-discount">-18%</span>
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/635461788459063/651036.jpg" alt="Monitor Dell 24 polegadas" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i> (4.7)
+                    </div>
+                    <h3 class="product-title">Notebook Asus Vivobook Go 15 AMD Athlon Silver 10 2.4GHz 4GB SSD 128GB 15,6" Windows 11 Home</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Monitor Gamer -->
+                <div class="product-card">
+                    <span class="badge-discount">-25%</span>
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/856861742998369/620734.jpg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> (5.0)
+                    </div>
+                    <h3 class="product-title">Monitor LED AOC 21,5" 22B30HM23 120Hz 1ms Gaming HDMI Preto</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                 <!-- Monitor Gamer -->
+                <div class="product-card">
+                    <span class="badge-discount">-25%</span>
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/1137601627561685/539309.jpg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> (5.0)
+                    </div>
+                    <h3 class="product-title">Monitor LED Philips 22" 221V8LW 75Hz Adaptive-Sync VA Branco</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- SCANNER -->
+                <div class="product-card">
+                    <span class="badge-discount">-25%</span>
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/702571710361416/595926.jpg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> (5.0)
+                    </div>
+                    <h3 class="product-title">Scanner de Mesa USB Canon Lide 300</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- SCANNER -->
+                <div class="product-card">
+                    <span class="badge-discount">-25%</span>
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/763501655744073/561011.jpg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> (5.0)
+                    </div>
+                    <h3 class="product-title">Scanner de Mesa USB Brother ADS-3100</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- SCANNER -->
+                <div class="product-card">
+                    <span class="badge-discount">-25%</span>
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/804841633611540/543624.jpg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> (5.0)
+                    </div>
+                    <h3 class="product-title">Scanner de Mesa USB Epson WorkForce ES-400 II</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Projetor -->
+                <div class="product-card" id="projetores">
+                    <span class="badge-discount">-10%</span>
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/461551755105696/631051.jpg" alt="Projetor Epson PowerLite" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i> (4.8)
+                    </div>
+                    <h3 class="product-title">Projetor Epson PowerLite E24 XGA 3600 Lúmens 3LCD</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Projetor Smart LED -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/723471756844489/633232.jpg" alt=" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Projetor Benq MX560C XGA 4000 Ansi Lumens DLP</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- IMPRESSORA -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/1158921735299780/539384.jpg" alt="Projetor Smart LED Portable" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Multifuncional Tanque de Tinta Epson EcoTank L3250 Wi-Fi - Subst. L3150</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                  <!-- SUPREMENTO -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/542911724781963/607151.jpg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Garrafa de Tinta Epson T544122-BR Preta 4.500 Páginas para EcoTank L3150 L3250 L3160 L3260 L3560 L5190 L5290 L5590</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- SUPREMENTO -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/534461724782313/607185.jpg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Garrafa de Tinta Epson T544422-BR Amarela 7.500 Páginas para EcoTank L3150 L3250 L3160 L3260 L3560 L5190 L5290 L5590</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- SUPREMENTO -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/550301724782080/607169.jpg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Garrafa de Tinta Epson T544222-BR Ciano 7.500 Páginas para EcoTank L3150 L3250 L3160 L3260 L3560 L5190 L5290 L5590</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- SUPREMENTO -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/544711724782204/607177.jpg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Garrafa de Tinta Epson T544322-BR Magenta 7.500 Páginas para EcoTank L3150 L3250 L3160 L3260 L3560 L5190 L5290 L5590</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+
+                  <!-- IMPRESSORA -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/988651716929150/600962.jpg" alt="Projetor Smart LED Portable" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Multifuncional Brother Laser DCP-L3560CDW Color Wi-Fi 110V</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                  <!-- Estabilizador -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/1832881626894629/370142.jpg" alt="Projetor Smart LED Portable" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Estabilizador SMS Monovolt 500VA Revolution Speedy NT 110V</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                  <!-- Estabilizador -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/1979341626879765/234435.jpg" alt="Projetor Smart LED Portable" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Modulo Isolador Estabilizado SMS Bivolt 500VA Progressive III NT</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                 <!-- Nobreak -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/1241131685368116/581437.jpg" alt="Projetor Smart LED Portable" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Nobreak SMS Bivolt 1400VA Tech Saída 220V</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                  <!-- DESKTOP -->
+                <div class="product-card">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_2X_799429-MLB115094706366_082026-F-pc-computador-cpu-intel-i5-3470--16gb-ram--ssd-120gb-win11.webp" alt="Projetor Smart LED Portable" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Pc Computador Cpu Intel I5 3470 + 16gb Ram + Ssd 120gb Win11</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- DESKTOP -->
+                <div class="product-card">
+                    <img src="https://images.kabum.com.br/produtos/fotos/sync_mirakl/948789/xlarge/Computador-Completo-Intel-Core-i5-8-Gb-SSD-480-Gb-Monitor-19_1784218121.png" alt="Projetor Smart LED Portable" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Computador Completo Intel Core i5 8 Gb SSD 480 Gb Monitor 19</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                 <!-- tv -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/1434451786391031/649554.jpg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Smart TV TCL 85" QLED 4K 85P7L Google TV Tela HVA Processador AIPQ Dolby Vision HDR10+ Google Assistente</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- tv -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/612431789655648/649376.jpg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Smart TV Samsung 50" Mini LED 4K</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- tv -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/1934601719844978/603724.jpg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Smart TV LG 55" 80TSA 4K QNED ThinQ AI Alexa Chromecast Airplay2</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                 <!-- Roteador -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/90331610393586/527033.jpg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Roteador Mercusys Wireless Dual Band AC1200 AC10</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Roteador -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/495311675254102/574228.jpg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Roteador TP-Link Wireless Dual Band AC1200 EC220-G5</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Swich -->
+                <div class="product-card">
+                    <img src="https://static.nagem.com.br/util/artefatos/produtos/n/n/535831629911234/507636.jpg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">Switch Intelbras 16 Portas Q+ Fast Ethernet com PoE Passivo SF-1600</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+                <!-- Swich -->
+                <div class="product-card">
+                    <img src="https://m.magazineluiza.com.br/a-static/420x420/switch-08-portas-10-100-mbps-tl-ls1008-tp-link/mercadaodainformatica/7650909476/48a7ff2da3aa1a7d9424db415ecf032d.jpeg" alt="" class="product-img" loading="lazy" width="250" height="180">
+                    <div class="product-rating">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> (4.4)
+                    </div>
+                    <h3 class="product-title">SWITCH 08 PORTAS 10/100 Mbps TL-LS1008 TP-LINK</h3>
+                    <div class="price-box">
+                    </div>
+                    <a href="orcamento.html" class="btn-add-cart"><i class="fa-solid fa-cart-plus"></i> Solicite o Orçamento</a>
+                </div>
+
+
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <h3>Receba ofertas do setor de Informática!</h3>
+            <p>Cadastre seu e-mail e fique sabendo primeiro sobre lançamentos e descontos em tecnologia.</p>
+            <form class="newsletter-form" action="#" method="POST">
+                <input type="email" placeholder="Digite seu e-mail corporativo ou pessoal" aria-label="E-mail para ofertas de informática" required>
+                <button type="submit">Inscrever-se</button>
+            </form>
+        </section>
+
+    </main>
+
+    <!-- Botão WhatsApp -->
+    <a href="https://wa.me/5581994162132" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" title="Fale conosco no WhatsApp" aria-label="Atendimento via WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>RMN Souza Comércio e Serviços</h4>
+                <p>Tecnologia e soluções completas para transformar seu lar ou otimizar sua empresa.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Departamentos</h4>
+                <ul>
+                    <li><a href="climatizacao.html">Climatização</a></li>
+                    <li><a href="informatica.html">Informática</a></li>
+                    <li><a href="ferramentas.html">Ferramentas</a></li>
+                    <li><a href="papelaria.html">Papelaria</a></li>
+                    <li><a href="refrigeradores.html">Refrigeradores</a></li>
+                    <li><a href="eletroportateis.html">Eletroportáteis</a></li>
+                    <li><a href="moveis-escritorio.html">Móveis de Escritório</a></li>
+                    <li><a href="audio.html">Áudio</a></li>
+                    <li><a href="servicos-seguranca.html">Segurança & Redes</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Atendimento</h4>
+                <ul>
+                    <li><a href="tel:5581994162132"><i class="fa-solid fa-phone"></i> (81) 99416-2132</a></li>
+                    <li><a href="mailto:contato@primetech.com"><i class="fa-solid fa-envelope"></i> contato@primetech.com</a></li>
+                    <li><i class="fa-solid fa-location-dot"></i> Joaquim Nabuco, PE - Brasil</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 RMN Souza Comércio e Serviços LTDA. Todos os direitos reservados.
+            <p class="dev-credit">Desenvolvido por <a href="portfolio.html" target="_blank" rel="noopener noreferrer">Wilkson Lima</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnDept = document.getElementById('btn-dept');
+            const menuDept = document.getElementById('menu-dept');
+
+            if (btnDept && menuDept) {
+                btnDept.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isOpen = menuDept.classList.toggle('is-active');
+                    btnDept.setAttribute('aria-expanded', isOpen);
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!btnDept.contains(e.target) && !menuDept.contains(e.target)) {
+                        menuDept.classList.remove('is-active');
+                        btnDept.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="products.js"></script>
+    <script src="site.js"></script>
+</body>
+</html>

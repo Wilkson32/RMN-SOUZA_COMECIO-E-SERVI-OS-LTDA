@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferramentas & Equipamentos | RMN Souza</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    
+    <!-- Fontes Google e Ícones FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Variáveis Globais de Tema */
+        :root {
+            --main-foreground: #0f172a; 
+            --main-background: #f8fafc;
+            --card-background: #ffffff;
+            --button-background: #16a34a; 
+            --button-hover: #15803d;
+            --header-background: #0033c6; 
+            --header-dark: #002288;
+            --footer-background: #0f172a;
+            --accent-orange: #ff5000; 
+            --accent-orange-hover: #e04600;
+            --heading-font: "Libre Baskerville", serif; 
+            --body-font: "Instrument Sans", sans-serif;
+            --border-radius: 12px; 
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 30px rgba(0,0,0,0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Reset e Estilos Base */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: var(--body-font); 
+            background: var(--main-background); 
+            color: var(--main-foreground); 
+            line-height: 1.5; 
+        }
+        h1, h2, h3, h4 { font-family: var(--heading-font); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Top Header */
+        .top-header { 
+            background: var(--header-background); 
+            color: #ffffff; 
+            padding: 15px 0 0; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: var(--shadow-sm);
+        }
+        .header-main-row { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            gap: 20px; 
+            padding-bottom: 15px; 
+            flex-wrap: wrap;
+        }
+        .logo { 
+            font-size: 24px; 
+            font-weight: 800; 
+            text-decoration: none; 
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
+        .search-bar { 
+            display: flex; 
+            flex-grow: 1; 
+            max-width: 600px; 
+            position: relative; 
+        }
+        .search-bar input { 
+            width: 100%; 
+            padding: 12px 45px 12px 20px; 
+            border-radius: 25px; 
+            border: none; 
+            outline: none; 
+            font-size: 14px;
+            box-shadow: var(--shadow-sm);
+        }
+        .search-bar button { 
+            position: absolute; 
+            right: 15px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            color: var(--header-background); 
+            font-size: 16px;
+        }
+        .user-actions { display: flex; gap: 12px; }
+        .btn-action { 
+            color: white; 
+            text-decoration: none; 
+            font-weight: 600; 
+            font-size: 14px; 
+            padding: 8px 16px; 
+            border-radius: 20px; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: var(--transition);
+        }
+        .btn-login { background: var(--accent-orange); }
+        .btn-login:hover { background: var(--accent-orange-hover); }
+        .btn-cart { background: rgba(255, 255, 255, 0.15); }
+        .btn-cart:hover { background: rgba(255, 255, 255, 0.25); }
+
+        /* Navegação e Dropdown */
+        .header-nav-row { display: flex; gap: 25px; align-items: center; }
+        .departamentos-container { position: relative; }
+        .btn-departamentos { 
+            background: var(--header-dark); 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            font-weight: 700; 
+            border-radius: var(--border-radius) var(--border-radius) 0 0; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: var(--transition);
+        }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: var(--card-background); 
+            min-width: 260px; 
+            box-shadow: var(--shadow-lg); 
+            z-index: 100; 
+            border-radius: 0 0 var(--border-radius) var(--border-radius); 
+        }
+        .departamentos-container:hover .dropdown-menu { display: block; }
+        .dropdown-menu a { 
+            color: var(--main-foreground); 
+            padding: 12px 18px; 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            font-weight: 500; 
+            transition: var(--transition);
+        }
+        .dropdown-menu a:hover { background: var(--main-background); color: var(--header-background); }
+        
+        .nav-links { display: flex; gap: 20px; list-style: none; overflow-x: auto; }
+        .nav-links a { 
+            color: white; 
+            text-decoration: none; 
+            font-size: 14px; 
+            font-weight: 600; 
+            opacity: 0.9; 
+            white-space: nowrap; 
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { opacity: 1; text-decoration: underline; }
+
+        /* Banner Hero */
+        .hero-banner { 
+            background: linear-gradient(135deg, var(--header-background) 0%, var(--header-dark) 100%); 
+            color: white; 
+            padding: 40px 0; 
+            text-align: center; 
+        }
+        .hero-banner h1 { font-size: 32px; margin-bottom: 8px; }
+        .hero-banner p { opacity: 0.9; }
+
+        /* Categorias Rápidas / Chips */
+        .quick-categories { padding: 20px 0; }
+        .categories-chips { 
+            display: flex; 
+            gap: 10px; 
+            overflow-x: auto; 
+            padding-bottom: 5px; 
+            scrollbar-width: thin;
+        }
+        .chip { 
+            background: var(--card-background); 
+            color: var(--main-foreground); 
+            padding: 10px 20px; 
+            border-radius: 20px; 
+            text-decoration: none; 
+            font-size: 14px; 
+            font-weight: 600; 
+            white-space: nowrap; 
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .chip:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .chip.active { background: var(--header-background); color: white; }
+
+        /* Grade de Produtos */
+        .products-section { padding: 30px 0 60px; }
+        .section-title { font-size: 24px; margin-bottom: 25px; color: var(--main-foreground); }
+        .products-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+            gap: 25px; 
+        }
+        .product-card { 
+            border: 1px solid #e2e8f0; 
+            border-radius: var(--border-radius); 
+            padding: 20px; 
+            text-align: center; 
+            background: var(--card-background); 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition); 
+        }
+        .product-card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: var(--shadow-md); 
+        }
+        
+        .product-image-container { 
+            height: 180px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            background: var(--main-background); 
+            border-radius: calc(var(--border-radius) - 4px); 
+            margin-bottom: 15px; 
+            overflow: hidden; 
+        }
+        .product-image-container img { 
+            max-width: 100%; 
+            max-height: 100%; 
+            object-fit: contain; 
+        }
+        .product-image-container i {
+            font-size: 54px;
+            color: var(--header-background);
+        }
+        
+        .product-title { 
+            font-size: 14px; 
+            font-weight: 600; 
+            margin-bottom: 15px; 
+            color: var(--main-foreground); 
+            line-height: 1.4;
+        }
+        .btn-buy { 
+            background: var(--button-background); 
+            color: white; 
+            text-decoration: none; 
+            padding: 12px; 
+            border-radius: var(--border-radius); 
+            font-weight: 700; 
+            display: block; 
+            transition: var(--transition); 
+        }
+        .btn-buy:hover { background: var(--button-hover); }
+
+        /* Rodapé Dark */
+        footer { 
+            background: var(--footer-background); 
+            color: #ffffff;
+            border-top: 4px solid var(--accent-orange); 
+            padding: 40px 0 20px; 
+        }
+        .footer-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 40px; 
+            margin-bottom: 30px;
+        }
+        .footer-col h4 { color: #ffffff; margin-bottom: 20px; font-size: 18px; }
+        .footer-col p { color: #94a3b8; font-size: 14px; line-height: 1.6; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col a { color: #cbd5e1; text-decoration: none; font-size: 14px; transition: var(--transition); }
+        .footer-col a:hover { color: var(--accent-orange); text-decoration: underline; }
+
+        .social-icons { display: flex; gap: 15px; margin-top: 15px; }
+        .social-icons a { 
+            width: 38px; 
+            height: 38px; 
+            background: rgba(255, 255, 255, 0.1); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: white; 
+            transition: var(--transition);
+        }
+        .social-icons a:hover { background: var(--accent-orange); transform: translateY(-2px); }
+
+        .footer-bottom {
+            border-top: 1px solid #1e293b;
+            padding-top: 25px;
+            text-align: center;
+            font-size: 13px;
+            color: #94a3b8;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: center;
+        }
+        .dev-credit {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+        .dev-credit a {
+            color: var(--accent-orange);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .dev-credit a:hover {
+            text-decoration: underline;
+            color: #ffffff;
+        }
+
+        /* Botão Flutuante WhatsApp */
+        .whatsapp-btn { 
+            position: fixed; 
+            bottom: 25px; 
+            right: 25px; 
+            background: #25d366; 
+            color: white; 
+            width: 55px; 
+            height: 55px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 28px; 
+            box-shadow: var(--shadow-lg); 
+            text-decoration: none; 
+            z-index: 999; 
+            transition: var(--transition); 
+        }
+        .whatsapp-btn:hover { transform: scale(1.1); }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-main-row { flex-direction: column; align-items: stretch; }
+            .user-actions { justify-content: space-between; }
+            .header-nav-row { flex-direction: column; align-items: stretch; }
+            .btn-departamentos { width: 100%; justify-content: center; }
+            .dropdown-menu { width: 100%; }
+        }
+    </style>
+    <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+    <!-- Header Principal -->
+    <header class="top-header">
+        <div class="container">
+            <div class="header-main-row">
+                <a href="index.html" class="logo" aria-label="RMN Souza Comércio e Serviços LTDA"><img src="img/logo-rmn.png" alt="RMN Souza Comércio e Serviços LTDA" class="logo-img"></a>
+
+                <form class="search-bar" action="busca.html" role="search">
+                    <input type="text" name="q" placeholder="O que você está procurando?" aria-label="Buscar produtos">
+                    <button type="submit" aria-label="Pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+
+                <div class="user-actions">
+                    <a href="login.html" class="btn-action btn-login">
+                        <i class="fa-regular fa-user"></i> Minha Conta
+                    </a>
+                    <a href="orcamento.html" class="btn-action btn-cart">
+                        <i class="fa-solid fa-cart-shopping"></i> Carrinho
+                    </a>
+                </div>
+            </div>
+
+            <div class="header-nav-row">
+                <div class="departamentos-container">
+                    <button class="btn-departamentos" type="button">
+                        <i class="fa-solid fa-bars"></i> DEPARTAMENTOS
+                    </button>
+                    
+                    <nav class="dropdown-menu">
+                        <a href="climatizacao.html"><i class="fa-solid fa-snowflake"></i> Climatização</a>
+                        <a href="informatica.html"><i class="fa-solid fa-laptop"></i> Informática</a>
+                        <a href="ferramentas.html"><i class="fa-solid fa-screwdriver-wrench"></i> Ferramentas</a>
+                        <a href="papelaria.html"><i class="fa-solid fa-scroll"></i> Papelaria</a>
+                        <a href="refrigeradores.html"><i class="fa-solid fa-kitchen-set"></i> Refrigeradores</a>
+                        <a href="eletroportateis.html"><i class="fa-solid fa-plug"></i> Eletroportáteis</a>
+                        <a href="moveis-escritorio.html"><i class="fa-solid fa-chair"></i> Móveis de Escritório</a>
+                        <a href="audio.html"><i class="fa-solid fa-headphones"></i> Áudio</a>
+                        <a href="servicos-seguranca.html"><i class="fa-solid fa-video"></i> Segurança & Redes</a>
+                        
+                    </nav>
+                </div>
+
+                <ul class="nav-links">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="climatizacao.html">Climatização</a></li>
+                    <li><a href="informatica.html">Informática</a></li>
+                    <li><a href="ferramentas.html" class="active">Ferramentas</a></li>
+                    <li><a href="papelaria.html">Papelaria</a></li>
+                    <li><a href="refrigeradores.html">Refrigeradores</a></li>
+                    <li><a href="eletroportateis.html">Eletroportáteis</a></li>
+                    <li><a href="moveis-escritorio.html">Móveis de Escritório</a></li>
+                    <li><a href="audio.html">Áudio</a></li>
+                    <li><a href="servicos-seguranca.html">Segurança & Redes</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner Hero -->
+    <section class="hero-banner">
+        <div class="container">
+            <h1>Ferramentas & Equipamentos</h1>
+            <p>Kits manuais, parafusadeiras e equipamentos de alta performance para qualquer projeto.</p>
+        </div>
+    </section>
+
+    <!-- Categorias Rápidas / Chips -->
+    <section class="quick-categories">
+        <div class="container">
+            <div class="categories-chips">
+                <a href="index.html" class="chip">Todos os Produtos</a>
+                <a href="climatizacao.html" class="chip">❄️ Climatização</a>
+                <a href="informatica.html" class="chip">💻 Informática</a>
+                <a href="ferramentas.html" class="chip active">🛠️ Ferramentas</a>
+                <a href="papelaria.html" class="chip">📜 Papelaria</a>
+                <a href="refrigeradores.html" class="chip">🧊 Refrigeradores</a>
+                <a href="eletroportateis.html" class="chip">🔌 Eletroportáteis</a>
+                <a href="moveis-escritorio.html" class="chip">🪑 Móveis de Escritório</a>
+                <a href="audio.html" class="chip">🎧 Áudio</a>
+                <a href="servicos-seguranca.html" class="chip">📹 Segurança & Redes</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Listagem de Produtos -->
+    <main class="container products-section">
+        <h2 class="section-title">Destaques em Ferramentas</h2>
+        <div class="products-grid">
+
+            <article class="product-card">
+                <div class="product-image-container">
+                    <img src="https://m.magazineluiza.com.br/a-static/420x420/parafusadeira-furadeira-de-impacto-sem-fio-2-baterias-21v-3-8-com-maleta-e-29-acessorios-fst009-fasterr/ddmaquinas/00084/4f1c8aeea8e68993cfa5c3f46917075b.jpeg" alt="Kit Multi Ferramentas Profissional FST001K">
+                </div>
+                <h3 class="product-title">Parafusadeira Furadeira De Impacto Sem Fio 2 Baterias 21V 3/8 Com Maleta e 29 Acessorios FST009 </h3>
+                <a href="orcamento.html" class="btn-buy">Solicite o Orçamento</a>
+            </article>
+
+             <article class="product-card">
+                <div class="product-image-container">
+                    <img src="https://m.magazineluiza.com.br/a-static/420x420/serra-marmore-4-3-8-pol-1-300w-2-discos-4100nh3zx2-makita/palaciodas-ferramentas/43853/54901296a57ca075e0345a5b8afd1962.jpeg" alt="Serra Mármore 4.3/8 POL 1.300W + 2 Discos 4100NH3ZX2 MAKITA">
+                </div>
+                <h3 class="product-title">Serra Mármore 4.3/8 POL 1.300W + 2 Discos 4100NH3ZX2 MAKITA </h3>
+                <a href="orcamento.html" class="btn-buy">Solicite o Orçamento</a>
+            </article>
+
+             <article class="product-card">
+                <div class="product-image-container">
+                    <img src="https://m.magazineluiza.com.br/a-static/420x420/furadeira-industrial-impacto-3-8-reversao-450w-gsb-450re-estojo-41-pecas-x-line-bosch/palaciodas-ferramentas/77047/f8744949188efe38bc54619c24d8e494.jpeg" alt="Kit Multi Ferramentas Profissional FST001K">
+                </div>
+                <h3 class="product-title">Furadeira Industrial Impacto 3/8 Reversão 450W GSB 450RE + Estojo 41 Peças X-Line BOSCH </h3>
+                <a href="orcamento.html" class="btn-buy">Solicite o Orçamento</a>
+            </article>
+
+            <article class="product-card">
+                <div class="product-image-container">
+                    <img src="https://m.magazineluiza.com.br/a-static/420x420/rocadeira-profissional-gasolina-2-tempos-52cc-tbc52x-toyama/reidasferramentasemaquinas/68555/b8dc95de02c249f24c882f3d94f186f3.jpeg" alt="Kit Multi Ferramentas Profissional FST001K">
+                </div>
+                <h3 class="product-title">Roçadeira Profissional Gasolina 2 Tempos 52cc Tbc52x Toyama </h3>
+                <a href="orcamento.html" class="btn-buy">Solicite o Orçamento</a>
+            </article>
+
+
+
+            
+        </div>
+    </main>
+
+    <!-- Botão Flutuante do WhatsApp -->
+    <a href="https://wa.me/5581994162132" class="whatsapp-btn" target="_blank" title="Fale conosco no WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Rodapé Dark Completo -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>RMN Souza Comércio e Serviços</h4>
+                    <p>Tecnologia e ferramentas completas para transformar seu lar ou otimizar sua empresa.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Departamentos</h4>
+                    <ul>
+                        <li><a href="climatizacao.html">Climatização</a></li>
+                        <li><a href="informatica.html">Informática</a></li>
+                        <li><a href="ferramentas.html">Ferramentas</a></li>
+                        <li><a href="papelaria.html">Papelaria</a></li>
+                        <li><a href="refrigeradores.html">Refrigeradores</a></li>
+                        <li><a href="eletroportateis.html">Eletroportáteis</a></li>
+                        <li><a href="moveis-escritorio.html">Móveis de Escritório</a></li>
+                        <li><a href="audio.html">Áudio</a></li>
+                        <li><a href="servicos-seguranca.html">Segurança & Redes</a></li>
+                    </ul>
+                    
+                </div>
+                <div class="footer-col">
+                    <h4>Atendimento</h4>
+                    <ul>
+                        <li><a href="tel:5581994162132"><i class="fa-solid fa-phone"></i> (81) 99416-2132</a></li>
+                        <li><a href="mailto:contato@primetech.com"><i class="fa-solid fa-envelope"></i> contato@primetech.com</a></li>
+                        <li><i class="fa-solid fa-location-dot"></i> Joaquim Nabuco, PE - Brasil</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                &copy; 2026 RMN Souza Comércio e Serviços LTDA. Todos os direitos reservados.
+                <p class="dev-credit">Desenvolvido por <a href="portfolio.html" target="_blank">Wilkson Lima</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="products.js"></script>
+    <script src="site.js"></script>
+</body>
+</html>
